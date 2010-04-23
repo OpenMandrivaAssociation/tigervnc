@@ -5,6 +5,7 @@
 %define rel             1
 
 Name:    tigervnc
+URL:     http://tigervnc.org/
 Version: %{version}
 %if %{snapshot}
 Release: %mkrel 0.%{snapshotversion}.%{rel}
