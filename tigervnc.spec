@@ -2,7 +2,7 @@
 %define snapshot        1
 %define snapshotversion 201004234031
 %define version         1.0.90
-%define rel             1
+%define rel             2
 
 Name:    tigervnc
 Version: %{version}
@@ -117,11 +117,6 @@ for all in `find . -type f -perm -001`; do
 	chmod -x "$all"
 done
 patch -p1 -b --suffix .vnc < ../xserver17.patch
-
-# Added by Shlomi Fish in order to fix the build of xserver-1.7.x.
-# It didn't build with it.
-sed -i '/^libvnc_la_LIBADD =/ s/$/ \$(OS_LIB) -lXdmcp/' hw/vnc/Makefile.am
-# End of added by Shlomi Fish.
 
 popd
 
