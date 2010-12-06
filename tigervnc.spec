@@ -152,7 +152,6 @@ autoreconf -fiv
 		--disable-xvfb \
 		--disable-xnest \
 		--disable-dmx \
-		--disable-xsdl \
 		--disable-xfbdev \
 		--disable-xephyr \
 		--disable-kdrive \
@@ -165,7 +164,6 @@ autoreconf -fiv
 		--with-extra-module-dir=%{extra_module_dir} \
 		--enable-xwrapper \
 		--enable-pam \
-		--with-fontdir="%{_datadir}/fonts" \
 		--with-default-font-path="catalogue:%{_sysconfdir}/X11/fontpath.d"
 
 %make
