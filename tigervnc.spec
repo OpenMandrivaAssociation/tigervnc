@@ -27,6 +27,7 @@ BuildRequires: x11-server-source
 BuildRequires: gettext-devel
 BuildRequires: libx11-devel
 BuildRequires: libxext-devel
+BuildRequires: x11-font-util
 BuildRequires: x11-util-macros
 BuildRequires: x11-xtrans-devel
 BuildRequires: mesagl-devel
