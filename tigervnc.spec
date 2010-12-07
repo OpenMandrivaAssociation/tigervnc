@@ -131,7 +131,7 @@ export CFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer"
 export CXXFLAGS="$CFLAGS"
 
 autoreconf -fiv
-%configure --disable-static
+%configure2_5x --disable-static --with-system-jpeg
 %make
 
 # XXX: I'm not sure this define is actually needed
