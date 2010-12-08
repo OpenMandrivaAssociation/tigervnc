@@ -2,7 +2,7 @@
 %define snapshot        1
 %define snapshotversion 201012034210
 %define version         1.0.90
-%define rel             1
+%define rel             2
 
 Name:    tigervnc
 Version: %{version}
@@ -20,6 +20,8 @@ Source0: %{name}-%{version}.tar.gz
 Source1: vncviewer.desktop
 # Missing from "make dist":
 Source2: %{name}-media.tar.gz
+Source3: sysconfig-vncservers
+Source4: vncserver-initscript
 
 Patch0: 0001-Add-lcrypto-for-SHA1-functions.patch
 
@@ -73,6 +75,9 @@ server.
 Summary: A remote display system's server
 Group:   System/X11
 
+Requires(post): rpm-helper
+Requires(preun): rpm-helper
+
 %description server
 The VNC system allows you to access the same desktop from a wide
 variety of platforms.  This package is a TigerVNC server, allowing
@@ -90,6 +95,14 @@ others to access the desktop on your machine.
 %{_mandir}/man1/vncconfig.1*
 %{_mandir}/man1/vncserver.1*
 %{_mandir}/man1/x0vncserver.1*
+%{_initrddir}/vncserver
+%config(noreplace) %{_sysconfdir}/sysconfig/vncservers
+
+%post server
+%_post_service vncserver
+
+%preun server
+%_preun_service vncserver
 
 #------------------------------------------------------------------------------
 
@@ -175,32 +188,37 @@ pushd media
 popd
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
+rm -rf %{buildroot}
+make install DESTDIR=%{buildroot}
 
 pushd unix/xserver/hw/vnc
-make install DESTDIR=$RPM_BUILD_ROOT
+make install DESTDIR=%{buildroot}
 popd
 
 # Install desktop stuff
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/{16x16,24x24,48x48}/apps
+mkdir -p %{buildroot}/%{_datadir}/icons/hicolor/{16x16,24x24,48x48}/apps
 
 pushd media/icons
 for s in 16 24 48; do
-install -m644 tigervnc_$s.png $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/${s}x$s/apps/tigervnc.png
+install -m644 tigervnc_$s.png %{buildroot}/%{_datadir}/icons/hicolor/${s}x$s/apps/tigervnc.png
 done
 popd
 
-mkdir $RPM_BUILD_ROOT%{_datadir}/applications
+mkdir %{buildroot}/%{_datadir}/applications
 desktop-file-install \
-	--dir $RPM_BUILD_ROOT%{_datadir}/applications \
-	%{SOURCE1}
+	--dir %{buildroot}%{_datadir}/applications \
+	%{_sourcedir}/vncviewer.desktop
+
+install -D %{_sourcedir}/sysconfig-vncservers \
+           %{buildroot}/%{_sysconfdir}/sysconfig/vncservers
+install -D %{_sourcedir}/vncserver-initscript \
+           %{buildroot}/%{_initrddir}/vncserver
 
 %find_lang %{name} %{name}.lang
 
 # remove unwanted files
-rm -f  $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/libvnc.la
+rm -f  %{buildroot}/%{_libdir}/xorg/modules/extensions/libvnc.la
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
