@@ -2,7 +2,7 @@
 %define snapshot        1
 %define snapshotversion 201012034210
 %define version         1.0.90
-%define rel             2
+%define rel             3
 
 Name:    tigervnc
 Version: %{version}
@@ -24,6 +24,8 @@ Source3: sysconfig-vncservers
 Source4: vncserver-initscript
 
 Patch0: 0001-Add-lcrypto-for-SHA1-functions.patch
+Patch1: 0002-TXViewport-set-the-window-max-width-height-consideri.patch
+Patch2: 0003-TXViewport-check-if-we-need-another-scrollbar-after-.patch
 
 BuildRequires: x11-server-source
 BuildRequires: gettext-devel
