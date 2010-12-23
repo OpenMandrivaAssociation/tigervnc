@@ -2,7 +2,7 @@
 %define snapshot        1
 %define snapshotversion 201012034210
 %define version         1.0.90
-%define rel             3
+%define rel             4
 
 Name:    tigervnc
 Version: %{version}
@@ -20,8 +20,6 @@ Source0: %{name}-%{version}.tar.gz
 Source1: vncviewer.desktop
 # Missing from "make dist":
 Source2: %{name}-media.tar.gz
-Source3: sysconfig-vncservers
-Source4: vncserver-initscript
 
 Patch0: 0001-Add-lcrypto-for-SHA1-functions.patch
 Patch1: 0002-TXViewport-set-the-window-max-width-height-consideri.patch
@@ -50,8 +48,11 @@ BuildRequires: nasm
 
 # package tigervnc
 
-Summary: A remote display system
-Group:   System/X11
+Summary: Viewer for the VNC remote display system
+Group:   Networking/Remote access
+
+Provides:  vncviewer
+Conflicts: tightvnc
 
 %description
 Virtual Network Computing (VNC) is a remote display system which
@@ -65,7 +66,7 @@ server.
 %defattr(-,root,root,-)
 %doc unix/README
 %{_bindir}/vncviewer
-%{_datadir}/icons/*
+%{_iconsdir}/*
 %{_datadir}/applications/*
 %{_mandir}/man1/vncviewer.1*
 
@@ -74,11 +75,13 @@ server.
 
 %package server
 
-Summary: A remote display system's server
-Group:   System/X11
+Summary: Server for the VNC remote display system
+Group:   Networking/Remote access
 
-Requires(post): rpm-helper
-Requires(preun): rpm-helper
+Provides:  vnc-server
+Conflicts: tightvnc-server
+
+Requires: vnc-server-common
 
 %description server
 The VNC system allows you to access the same desktop from a wide
@@ -97,21 +100,15 @@ others to access the desktop on your machine.
 %{_mandir}/man1/vncconfig.1*
 %{_mandir}/man1/vncserver.1*
 %{_mandir}/man1/x0vncserver.1*
-%{_initrddir}/vncserver
-%config(noreplace) %{_sysconfdir}/sysconfig/vncservers
-
-%post server
-%_post_service vncserver
-
-%preun server
-%_preun_service vncserver
 
 #------------------------------------------------------------------------------
 
 %package server-module
 
-Summary:  the remote display system module to Xorg
-Group:    System/X11
+Summary: Xorg module for the VNC remote display system
+Group:   Networking/Remote access
+
+Provides: vnc-server-module
 
 Requires: x11-server-xorg
 
@@ -210,11 +207,6 @@ mkdir %{buildroot}/%{_datadir}/applications
 desktop-file-install \
 	--dir %{buildroot}%{_datadir}/applications \
 	%{_sourcedir}/vncviewer.desktop
-
-install -D %{_sourcedir}/sysconfig-vncservers \
-           %{buildroot}/%{_sysconfdir}/sysconfig/vncservers
-install -D %{_sourcedir}/vncserver-initscript \
-           %{buildroot}/%{_initrddir}/vncserver
 
 %find_lang %{name} %{name}.lang
 
