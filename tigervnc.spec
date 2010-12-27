@@ -2,7 +2,7 @@
 %define snapshot        1
 %define snapshotversion 201012034210
 %define version         1.0.90
-%define rel             4
+%define rel             5
 
 Name:    tigervnc
 Version: %{version}
@@ -122,6 +122,33 @@ to access the desktop on your machine.
 
 #------------------------------------------------------------------------------
 
+%package java
+
+Summary: Java viewer for the VNC remote display system
+Group:   Networking/Remote access
+
+Provides:  vnc-java
+Conflicts: tightvnc-java
+
+# "TightVNC-specific" is not a typo, see the README file located inside the
+# java source tree
+%description java
+This distribution is based on the standard VNC source and includes new
+TightVNC-specific features and fixes, such as additional low-bandwidth
+optimizations, major GUI improvements, and more.
+
+There are three basic ways to use TigerVNC Java viewer:
+  1. Running applet as part of TigerVNC server installation.
+  2. Running applet hosted on a standalone Web server.
+  3. Running the viewer as a standalone application.
+
+%files java
+%defattr(-,root,root)
+%{_javadir}/*.jar
+%{_datadir}/%{name}
+
+#------------------------------------------------------------------------------
+
 %prep
 %setup -q
 %setup -a 2
@@ -186,12 +213,17 @@ pushd media
 %make
 popd
 
+# Build java
+pushd java/src/com/tigervnc/vncviewer
+%make all
+popd
+
 %install
 rm -rf %{buildroot}
-make install DESTDIR=%{buildroot}
+%makeinstall_std
 
 pushd unix/xserver/hw/vnc
-make install DESTDIR=%{buildroot}
+%makeinstall_std
 popd
 
 # Install desktop stuff
@@ -212,6 +244,24 @@ desktop-file-install \
 
 # remove unwanted files
 rm -f  %{buildroot}/%{_libdir}/xorg/modules/extensions/libvnc.la
+
+
+# java
+install -d -m 755 %{buildroot}%{_javadir}
+install -d -m 755 %{buildroot}%{_datadir}/%{name}/classes
+pushd java/src/com/tigervnc/vncviewer
+make install INSTALL_DIR=%{buildroot}%{_datadir}/%{name}/classes \
+             ARCHIVE=vncviewer-%{version}.jar
+popd
+pushd %{buildroot}%{_datadir}/%{name}/classes
+mv vncviewer-%{version}.jar %{buildroot}%{_javadir}
+ln -s %{_javadir}/vncviewer-%{version}.jar VncViewer.jar
+popd
+pushd %{buildroot}%{_javadir}
+ln -s vncviewer-%{version}.jar vncviewer.jar
+ln -s vncviewer-%{version}.jar VncViewer.jar
+popd
+
 
 %clean
 rm -rf %{buildroot}
