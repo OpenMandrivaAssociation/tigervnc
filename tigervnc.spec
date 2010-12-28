@@ -43,6 +43,7 @@ BuildRequires: libxtst-devel
 BuildRequires: gnutls-devel
 BuildRequires: imagemagick
 BuildRequires: nasm
+BuildRequires: java-devel
 
 #------------------------------------------------------------------------------
 
