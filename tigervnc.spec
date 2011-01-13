@@ -2,7 +2,7 @@
 %define snapshot        1
 %define snapshotversion 201012034210
 %define version         1.0.90
-%define rel             5
+%define rel             6
 
 Name:    tigervnc
 Version: %{version}
@@ -52,6 +52,8 @@ BuildRequires: java-devel
 Summary: Viewer for the VNC remote display system
 Group:   Networking/Remote access
 
+# Old RealVNC package:
+Obsoletes: vnc
 Provides:  vncviewer
 Conflicts: tightvnc
 
@@ -79,6 +81,8 @@ server.
 Summary: Server for the VNC remote display system
 Group:   Networking/Remote access
 
+# Old RealVNC package:
+Obsoletes: vnc-server
 Provides:  vnc-server
 Conflicts: tightvnc-server
 
@@ -128,6 +132,8 @@ to access the desktop on your machine.
 Summary: Java viewer for the VNC remote display system
 Group:   Networking/Remote access
 
+# Old RealVNC package:
+Obsoletes: vnc-java
 Provides:  vnc-java
 Conflicts: tightvnc-java
 
