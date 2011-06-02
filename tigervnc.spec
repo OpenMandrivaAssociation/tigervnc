@@ -211,6 +211,7 @@ autoreconf -fiv
 %define extra_module_dir %{_libdir}/xorg/extra-modules
 
 pushd unix/xserver
+rm -f configure
 autoreconf -fiv
 
 # After the "--disable-config-hal", most options are just a paste from
