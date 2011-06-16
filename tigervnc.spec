@@ -2,7 +2,7 @@
 %define snapshot        1
 %define snapshotversion 201103164362
 %define version         1.0.90
-%define rel             1
+%define rel             2
 
 Name:    tigervnc
 Version: %{version}
@@ -186,7 +186,7 @@ popd
 patch -p1 -b --suffix .vnc < %{SOURCE3}
 
 %patch15 -p0 -b .CVE-2011-1775
-#%%patch16 -p1 -b .xorg111
+%patch16 -p1 -b .xorg111
 
 %patch50 -p0
 
