@@ -19,7 +19,7 @@ Source1: vncviewer.desktop
 # Missing from "make dist":
 Source2: %{name}-media.tar.gz
 # S3: combines 0001-Add-lcrypto-for-SHA1-functions.patch and the unix/xserver19.patch patch
-Source3: tigervnc-1.0.90-xserver19.diff
+Source3: tigervnc-1.0.90-xserver110.diff
 # fedora patches
 Patch0: tigervnc-102434.patch
 Patch4: tigervnc-cookie.patch
