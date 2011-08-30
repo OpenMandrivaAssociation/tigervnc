@@ -31,6 +31,7 @@ Patch13: tigervnc11-rh692048.patch
 Patch14: 0001-Use-memmove-instead-of-memcpy-in-fbblt.c-when-memory.patch
 Patch15: tigervnc11-CVE-2011-1775.patch
 Patch16: tigervnc11-xorg111.patch
+Patch17: tigervnc-1.0.90-fix-local-library-api-change-patch
 
 Patch50: 0001-Add-lcrypto-for-SHA1-functions.patch
 BuildRequires: x11-server-source
@@ -187,6 +188,7 @@ patch -p1 -b --suffix .vnc < %{SOURCE3}
 
 %patch15 -p0 -b .CVE-2011-1775
 %patch16 -p1 -b .xorg111
+%patch17 -p1 -b .api_change~
 
 %patch50 -p0
 
@@ -205,7 +207,6 @@ autoreconf -fiv
 
 # XXX: I'm not sure this define is actually needed
 # Need this for shared objects that reference X Server, or other modules symbols
-%define _disable_ld_no_undefined 1
 # Search for modules in extra_module_dir before the default path.
 # This will allow fglrx to install its modified modules in more cleaner way.
 %define extra_module_dir %{_libdir}/xorg/extra-modules
