@@ -32,6 +32,7 @@ Patch14: 0001-Use-memmove-instead-of-memcpy-in-fbblt.c-when-memory.patch
 Patch15: tigervnc11-CVE-2011-1775.patch
 Patch16: tigervnc11-xorg111.patch
 Patch17: tigervnc-1.0.90-fix-local-library-api-change-patch
+Patch18: tigervnc-1.0.90-link-against-forgotten-local-library.patch
 
 Patch50: 0001-Add-lcrypto-for-SHA1-functions.patch
 BuildRequires: x11-server-source
@@ -189,6 +190,7 @@ patch -p1 -b --suffix .vnc < %{SOURCE3}
 %patch15 -p0 -b .CVE-2011-1775
 %patch16 -p1 -b .xorg111
 %patch17 -p1 -b .api_change~
+%patch18 -p1 -b .linkage~
 
 %patch50 -p0
 
