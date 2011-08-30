@@ -32,6 +32,8 @@ Patch14: 0001-Use-memmove-instead-of-memcpy-in-fbblt.c-when-memory.patch
 Patch15: tigervnc11-CVE-2011-1775.patch
 Patch16: tigervnc11-xorg111.patch
 Patch17: tigervnc-1.0.90-fix-local-library-api-change-patch
+#(proyvind): FIXME: this one got fscked, needs to be fixed in Makefile.am, so
+# that miext/sync/libsync.la gets built first...
 Patch18: tigervnc-1.0.90-link-against-forgotten-local-library.patch
 
 Patch50: 0001-Add-lcrypto-for-SHA1-functions.patch
