@@ -56,6 +56,7 @@ BuildRequires: gnutls-devel
 BuildRequires: imagemagick
 BuildRequires: nasm
 BuildRequires: java-devel
+BuildRequires: autoconf
 
 #------------------------------------------------------------------------------
 
