@@ -1,5 +1,3 @@
 sources:
-  "tigervnc-1.1.0-xserver110.diff:"	226f84a19e73e2c084da813b3f21e9a5679dba3c
-  "tigervnc-1.2.0.tar.gz:"	0542b2549a85b6723deebc3b5ecafa4f1fbee8e6
-  "tigervnc-media.tar.gz:"	16bf1962bd22e47904fde371aa2421a50e948d55
-  "vncviewer.desktop:"	ecbd27a6bc3e3619f46d1b085657655335680ccf
+  "tigervnc-1.1.0.tar.gz": a678745c231a37eea92c7c7c259f7495061a9a0d
+  "tigervnc-media.tar.gz": 16bf1962bd22e47904fde371aa2421a50e948d55
