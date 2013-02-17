@@ -4,7 +4,7 @@
 %define rel             3
 
 Name:		tigervnc
-Version:	1.1.0
+Version:	1.2.0
 %if %{snapshot}
 Release:	0.%{snapshotversion}.%{rel}
 %else
