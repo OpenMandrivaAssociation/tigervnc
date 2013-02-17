@@ -173,18 +173,14 @@ popd
 
 %patch14 -p1 -b .glx
 
-# Use newer gettext
-sed -i 's/AM_GNU_GETTEXT_VERSION.*/AM_GNU_GETTEXT_VERSION([0.17])/' \
-	configure.ac
-
 %build
 # Temporary build with -fno-omit-frame-pointer, it causes problems
 export CFLAGS="%{optflags} -fno-omit-frame-pointer"
 export CXXFLAGS="$CFLAGS"
 
-autoreconf -fiv
-%configure2_5x --disable-static --with-system-jpeg
+%{cmake}
 %make
+cd ..
 
 # XXX: I'm not sure this define is actually needed
 # Need this for shared objects that reference X Server, or other modules symbols
@@ -236,7 +232,9 @@ popd
 %install
 rm -rf %{buildroot}
 
+push build
 %makeinstall_std
+popd
 
 pushd unix/xserver/hw/vnc
 %makeinstall_std
