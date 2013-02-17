@@ -50,6 +50,8 @@ BuildRequires:	nasm
 #BuildRequires:	java-devel
 BuildRequires:	autoconf
 BuildRequires:	java-1.6.0-openjdk-devel
+BuildRequires:	cmake
+BuildRequires:	fltk-devel
 
 #------------------------------------------------------------------------------
 
