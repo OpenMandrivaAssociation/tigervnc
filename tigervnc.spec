@@ -218,7 +218,7 @@ autoreconf -fiv
 		--enable-pam \
 		--with-default-font-path="catalogue:%{_sysconfdir}/X11/fontpath.d"
 
-%make
+make
 popd
 
 # Build icons
@@ -227,8 +227,9 @@ pushd media
 popd
 
 # Build java
-pushd java/src/com/tigervnc/vncviewer
-%make all
+pushd java
+%{cmake}
+cd ..
 popd
 
 %install
