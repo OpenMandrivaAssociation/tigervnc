@@ -254,7 +254,7 @@ popd
 mkdir %{buildroot}/%{_datadir}/applications
 desktop-file-install \
 	--dir %{buildroot}%{_datadir}/applications \
-	%{_sourcedir}/vncviewer.desktop
+	%{SOURCE1}
 
 %find_lang %{name} %{name}.lang
 
