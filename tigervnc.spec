@@ -19,8 +19,8 @@ Source1:	vncviewer.desktop
 Source2:	%{name}-media.tar.gz
 # fedora patches
 Patch4:		tigervnc-cookie.patch
-Patch10:	tigervnc11-ldnow.patch
-Patch11:	tigervnc11-gethomedir.patch
+Patch10:	tigervnc12-ldnow.patch
+Patch11:	tigervnc12-gethomedir.patch
 Patch13:	tigervnc11-rh692048.patch
 Patch14:	tigervnc12-xorg113-glx.patch
 
