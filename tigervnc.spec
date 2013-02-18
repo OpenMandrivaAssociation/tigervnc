@@ -52,7 +52,7 @@ BuildRequires:	imagemagick
 BuildRequires:	nasm
 #BuildRequires:	java-devel
 BuildRequires:	autoconf
-BuildRequires:	java-1.6.0-openjdk-devel
+BuildRequires:	java-1.7.0-openjdk-devel
 BuildRequires:	cmake
 BuildRequires:	fltk-devel
 
@@ -223,7 +223,7 @@ autoreconf -fiv
 		--enable-pam \
 		--with-default-font-path="catalogue:%{_sysconfdir}/X11/fontpath.d"
 
-%make LIB_DIR=
+%make
 popd
 
 # Build icons
