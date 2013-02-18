@@ -56,6 +56,7 @@ BuildRequires:	autoconf
 BuildRequires:	java-1.7.0-openjdk-devel
 BuildRequires:	cmake
 BuildRequires:	fltk-devel
+BuildRequires:	pkgconfig(libtirpc)
 
 #------------------------------------------------------------------------------
 
