@@ -17,6 +17,9 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	vncviewer.desktop
 # Missing from "make dist":
 Source2:	%{name}-media.tar.gz
+# we put cmake build into a different dir
+Patch1:		tigervnc-1.2.80-builddir.patch
+
 # fedora patches
 Patch4:		tigervnc-cookie.patch
 Patch10:	tigervnc12-ldnow.patch
@@ -160,6 +163,7 @@ There are three basic ways to use TigerVNC Java viewer:
 %prep
 %setup -q -a2
 
+%patch1 -p1 -b .builddir
 %patch4 -p1 -b .cookie
 %patch10 -p1 -b .ldnow
 %patch11 -p1 -b .gethomedir
@@ -207,6 +211,7 @@ autoreconf -fiv
 		--disable-kdrive \
 		--disable-config-dbus \
 		--disable-config-hal \
+		--disable-selective-werror \
 		--disable-static \
 		--disable-unit-tests \
 		--with-log-dir=%{_logdir} \
@@ -218,7 +223,7 @@ autoreconf -fiv
 		--enable-pam \
 		--with-default-font-path="catalogue:%{_sysconfdir}/X11/fontpath.d"
 
-make
+%make LIB_DIR=
 popd
 
 # Build icons

@@ -1,0 +1,9 @@
+--- tigervnc-1.2.80/unix/xserver/hw/vnc/Makefile.am.orig	2013-02-18 06:07:43.227040069 +0000
++++ tigervnc-1.2.80/unix/xserver/hw/vnc/Makefile.am	2013-02-18 06:07:55.369040561 +0000
+@@ -1,5 +1,5 @@
+ TIGERVNC_SRCDIR=${top_srcdir}/../..
+-LIB_DIR=${top_builddir}/../../common
++LIB_DIR=${top_builddir}/../../build/common
+ 
+ RFB_LIB=$(LIB_DIR)/rfb/librfb.la
+ RDR_LIB=$(LIB_DIR)/rdr/librdr.la
