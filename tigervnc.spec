@@ -214,6 +214,7 @@ autoreconf -fiv
 		--disable-xephyr \
 		--disable-kdrive \
 		--disable-config-dbus \
+		--enable-glx --disable-dri --enable-dri2 \
 		--disable-config-hal \
 		--disable-selective-werror \
 		--disable-static \
@@ -271,7 +272,7 @@ desktop-file-install \
 
 # remove unwanted files
 rm -f  %{buildroot}/%{_libdir}/xorg/modules/extensions/libvnc.la
-
+rm -rf  %{buildroot}/%{_datadir}/doc/%{name}-%{version}
 
 # java
 install -d -m 755 %{buildroot}%{_javadir}
