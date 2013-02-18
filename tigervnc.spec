@@ -19,6 +19,7 @@ Source1:	vncviewer.desktop
 Source2:	%{name}-media.tar.gz
 # we put cmake build into a different dir
 Patch1:		tigervnc-1.2.80-builddir.patch
+Patch2:		tigervnc-1.2.80-link.patch
 
 # fedora patches
 Patch4:		tigervnc-cookie.patch
@@ -164,6 +165,7 @@ There are three basic ways to use TigerVNC Java viewer:
 %setup -q -a2
 
 %patch1 -p1 -b .builddir
+
 %patch4 -p1 -b .cookie
 %patch10 -p1 -b .ldnow
 %patch11 -p1 -b .gethomedir
@@ -178,6 +180,8 @@ patch -p1 -b --suffix .vnc < ../xserver113.patch
 popd
 
 %patch14 -p1 -b .glx
+
+%patch2 -p0 -b .link
 
 %build
 # Temporary build with -fno-omit-frame-pointer, it causes problems
@@ -234,13 +238,14 @@ popd
 # Build java
 pushd java
 %{cmake}
+%make
 cd ..
 popd
 
 %install
 rm -rf %{buildroot}
 
-push build
+pushd build
 %makeinstall_std
 popd
 
@@ -271,9 +276,12 @@ rm -f  %{buildroot}/%{_libdir}/xorg/modules/extensions/libvnc.la
 # java
 install -d -m 755 %{buildroot}%{_javadir}
 install -d -m 755 %{buildroot}%{_datadir}/%{name}/classes
-pushd java/src/com/tigervnc/vncviewer
-    make install INSTALL_DIR=%{buildroot}%{_datadir}/%{name}/classes \
-    ARCHIVE=vncviewer-%{version}.jar
+pushd java/build
+    install -m 755 VncViewer.jar %{buildroot}%{_datadir}/%{name}/classes/vncviewer-%{version}.jar
+popd
+
+pushd java
+    install -m 644 com/tigervnc/vncviewer/index.vnc %{buildroot}%{_datadir}/%{name}/classes
 popd
 
 pushd %{buildroot}%{_datadir}/%{name}/classes
@@ -285,73 +293,4 @@ pushd %{buildroot}%{_javadir}
     ln -s vncviewer-%{version}.jar vncviewer.jar
     ln -s vncviewer-%{version}.jar VncViewer.jar
 popd
-
-%changelog
-* Thu Sep 01 2011 Guilherme Moro <guilherme@mandriva.com> 1.1.0-0mdv2012.0
-+ Revision: 697750
-- updated to version 1.1.0
-
-* Tue Aug 30 2011 Per Øyvind Karlsen <peroyvind@mandriva.org> 1.0.90-0.201103164362.2
-+ Revision: 697519
-- fix linkage against forgotten local static library
-- fix api change of local library
-
-  + Oden Eriksson <oeriksson@mandriva.com>
-    - new S3
-    - try applying the x11 patch
-
-* Thu Jun 02 2011 Oden Eriksson <oeriksson@mandriva.com> 1.0.90-0.201103164362.1
-+ Revision: 682426
-- fix build
-- new 1.0.90 source, essentially this is 1.1beta1 and it's the official tar ball
-- sync patches with tigervnc-1.0.90-5.fc16.src.rpm which also fixes CVE-2011-1775
-- unify the xserver19 patch as S3
-
-  + Paulo Ricardo Zanoni <pzanoni@mandriva.com>
-    - Remove deprecated Encoding key from desktop file
-
-* Thu Jan 13 2011 Paulo Ricardo Zanoni <pzanoni@mandriva.com> 1.0.90-0.201012034210.6
-+ Revision: 631010
-- Obsolete RealVNC packages
-
-* Tue Dec 28 2010 Paulo Ricardo Zanoni <pzanoni@mandriva.com> 1.0.90-0.201012034210.5mdv2011.0
-+ Revision: 625668
-- BR java-devel
-- Add -java package
-- Use %%makeinstall_std
-
-* Thu Dec 23 2010 Paulo Ricardo Zanoni <pzanoni@mandriva.com> 1.0.90-0.201012034210.4mdv2011.0
-+ Revision: 624170
-- Remove sysconfig, initscript and require vnc-server-common
-- Fix dekstop file categories
-- Update summaries, descriptions, profiles, conflicts and groups (part of vnc
-  packages standardization)
-
-* Thu Dec 16 2010 Paulo Ricardo Zanoni <pzanoni@mandriva.com> 1.0.90-0.201012034210.3mdv2011.0
-+ Revision: 622330
-- Add patches to fix problems with scrollbars.
-
-* Wed Dec 08 2010 Paulo Ricardo Zanoni <pzanoni@mandriva.com> 1.0.90-0.201012034210.2mdv2011.0
-+ Revision: 616320
-- Add initscript file
-- Add sysconfig/vncservers file
-- Use configure2_5x
-- Use system jpeg
-- Remove unrecognized configure options
-- Don't chmod files copied by x11-server-source
-
-* Mon Dec 06 2010 Paulo Ricardo Zanoni <pzanoni@mandriva.com> 1.0.90-0.201012034210.1mdv2011.0
-+ Revision: 612395
-- Update to newer revision
-- Use xserver19 patch
-- Fix linking
-
-* Wed May 05 2010 Paulo Ricardo Zanoni <pzanoni@mandriva.com> 1.0.90-0.201004234031.2mdv2010.1
-+ Revision: 542633
-- Remove sed in Makefile.am (was breaking libvnc.so)
-- Add URL tag
-
-* Fri Apr 23 2010 Paulo Ricardo Zanoni <pzanoni@mandriva.com> 1.0.90-0.201004234031.1mdv2010.1
-+ Revision: 538366
-- import tigervnc
 
