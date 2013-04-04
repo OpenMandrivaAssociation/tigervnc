@@ -20,7 +20,7 @@ Source2:	%{name}-media.tar.gz
 # we put cmake build into a different dir
 Patch1:		tigervnc-1.2.80-builddir.patch
 Patch2:		tigervnc-1.2.80-link.patch
-
+Patch3:		tigervnc-1.2.80-strfmt.patch
 # fedora patches
 Patch4:		tigervnc-cookie.patch
 Patch10:	tigervnc12-ldnow.patch
@@ -166,6 +166,7 @@ There are three basic ways to use TigerVNC Java viewer:
 %setup -q -a2
 
 %patch1 -p1 -b .builddir
+%patch3 -p1 -b .strfmt
 
 %patch4 -p1 -b .cookie
 %patch10 -p1 -b .ldnow

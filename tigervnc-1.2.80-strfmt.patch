@@ -1,0 +1,11 @@
+--- tigervnc-1.2.80/vncviewer/vncviewer.cxx.orig	2013-04-04 06:41:14.707289391 +0100
++++ tigervnc-1.2.80/vncviewer/vncviewer.cxx	2013-04-04 06:41:53.568287121 +0100
+@@ -304,7 +304,7 @@
+ 
+   snprintf(vncServerName, VNCSERVERNAMELEN, "localhost::%d", localPort);
+   vncServerName[VNCSERVERNAMELEN - 1] = '\0';
+-  vlog.error(vncServerName);
++  vlog.error("%s", vncServerName);
+ 
+   return 0;
+ }
