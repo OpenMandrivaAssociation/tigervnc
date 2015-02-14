@@ -1,3 +1,5 @@
-sources:
-  tigervnc-media.tar.gz: 16bf1962bd22e47904fde371aa2421a50e948d55
+removed_sources:
   tigervnc-1.3.0.tar.bz2: eda373336bee1bcfa806df1ea6389d918945a258
+sources:
+  tigervnc-1.4.2.tar.gz: 9d43af0ea1edcad83d43dd16a7afe41ab773b378
+  tigervnc-media.tar.gz: 16bf1962bd22e47904fde371aa2421a50e948d55

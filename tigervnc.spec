@@ -4,15 +4,14 @@
 %define rel             1
 
 Name:		tigervnc
-Version:	1.3.0
+Version:	1.4.2
 %if %{snapshot}
 Release:	0.%{snapshotversion}.%{rel}
-Source0:	%{name}-%{version}-%{snapshotversion}.tar.bz2
+Source0:	%{name}-%{version}-%{snapshotversion}.tar.gz
 %else
 Release:	%{rel}
-Source0:	http://optimate.dl.sourceforge.net/project/tigervnc/tigervnc/%{version}/%{name}-%{version}.tar.bz2
+Source0:	https://github.com/TigerVNC/tigervnc/archive/%{name}-%{version}.tar.gz
 %endif
-
 License:	GPLv2+
 URL:		http://www.tigervnc.com/
 Source1:	vncviewer.desktop
@@ -21,23 +20,21 @@ Source2:	%{name}-media.tar.gz
 Source3:	vncserver.service
 Source4:	vncserver.sysconfig
 Source5:	10-libvnc.conf
+Source6:	tigervnc-xserver116-rebased.patch
 # we put cmake build into a different dir
 Patch1:		tigervnc-1.2.80-builddir.patch
 Patch2:		tigervnc-1.2.80-link.patch
-Patch3:		tigervnc-1.2.80-strfmt.patch
 # fedora patches
 Patch10:	tigervnc-cookie.patch
 Patch11:	tigervnc11-ldnow.patch
-Patch12:	tigervnc11-gethomedir.patch
-Patch13:	tigervnc11-rh692048.patch
-Patch14:	tigervnc-inetd-nowait.patch
-Patch15:	tigervnc-setcursor-crash.patch
-Patch16:	tigervnc-manpages.patch
-Patch17:	tigervnc-getmaster.patch
-Patch18:	tigervnc-shebang.patch
-Patch19:	tigervnc-1.3.0-xserver-1.15.patch
-Patch21:	tigervnc-zrle-crash.patch
-Patch22:	tigervnc-cursor.patch
+Patch12:	tigervnc11-rh692048.patch
+Patch13:	tigervnc-inetd-nowait.patch
+Patch14:	tigervnc-manpages.patch
+Patch15:	tigervnc-getmaster.patch
+Patch16:	tigervnc-shebang.patch
+Patch17:	tigervnc-format-security.patch
+Patch18:	tigervnc-xstartup.patch
+Patch19:	tigervnc-xserver117.patch
 
 
 #(proyvind): FIXME: this one got fscked, needs to be fixed in Makefile.am, so
@@ -63,9 +60,8 @@ BuildRequires:	pam-devel
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	imagemagick
 BuildRequires:	nasm
-#BuildRequires:	java-devel
+BuildRequires:	java-devel
 BuildRequires:	autoconf
-BuildRequires:	java-1.7.0-openjdk-devel
 BuildRequires:	cmake
 BuildRequires:	fltk-devel
 BuildRequires:	pkgconfig(libtirpc)
@@ -188,7 +184,7 @@ pushd unix/xserver
 for all in `find . -type f -perm -001`; do
 	chmod -x "$all"
 done
-patch -p1 -b --suffix .vnc < ../xserver114.patch
+patch -p1 -b --suffix .vnc < %{SOURCE6}
 popd
 %apply_patches
 
@@ -218,7 +214,8 @@ autoreconf -fiv
 # After the "--disable-config-hal", most options are just a paste from
 # Mandriva's x11-server. We need to check what we can clean here (without
 # reducing features)
-%configure2_5x  --disable-xorg \
+export CC=gcc
+%configure  --disable-xorg \
 		--disable-xwin \
 		--disable-xvfb \
 		--disable-xnest \
@@ -234,6 +231,7 @@ autoreconf -fiv
 		--disable-static \
 		--disable-unit-tests \
 		--with-log-dir=%{_logdir} \
+		--without-dtrace \
 		--with-os-vendor="OpenMandriva" \
 		--with-os-name="`echo \`uname -s -r\` | sed -e s'/ /_/g'`" \
 		--with-vendor-web="http://openmandriva.org" \
