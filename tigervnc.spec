@@ -8,7 +8,7 @@ Version:	1.4.2
 Release:	0.%{snapshotversion}.1
 Source0:	%{name}-%{version}-%{snapshotversion}.tar.gz
 %else
-Release:	3
+Release:	4
 Source0:	https://github.com/TigerVNC/tigervnc/archive/%{name}-%{version}.tar.gz
 %endif
 License:	GPLv2+
