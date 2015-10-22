@@ -27,16 +27,10 @@ Patch1:		tigervnc-1.2.80-builddir.patch
 Patch2:		tigervnc-1.2.80-link.patch
 # fedora patches
 Patch10:	tigervnc-cookie.patch
-Patch11:	tigervnc11-ldnow.patch
 Patch12:	tigervnc11-rh692048.patch
-Patch13:	tigervnc-inetd-nowait.patch
 Patch14:	tigervnc-manpages.patch
-Patch15:	tigervnc-getmaster.patch
 Patch16:	tigervnc-shebang.patch
-Patch17:	tigervnc-format-security.patch
 Patch18:	tigervnc-xstartup.patch
-Patch19:	tigervnc-xserver117.patch
-
 
 #(proyvind): FIXME: this one got fscked, needs to be fixed in Makefile.am, so
 # that miext/sync/libsync.la gets built first...
