@@ -2,8 +2,9 @@
 %define snapshot        0
 %define snapshotversion 20140212svn5159
 
+Summary:	Viewer for the VNC remote display system
 Name:		tigervnc
-Version:	1.4.2
+Version:	1.5.0
 %if %{snapshot}
 Release:	0.%{snapshotversion}.1
 Source0:	%{name}-%{version}-%{snapshotversion}.tar.gz
@@ -13,6 +14,7 @@ Source0:	https://github.com/TigerVNC/tigervnc/archive/%{name}-%{version}.tar.gz
 %endif
 License:	GPLv2+
 URL:		http://www.tigervnc.com/
+Group:		Networking/Remote access
 Source1:	vncviewer.desktop
 # Missing from "make dist":
 Source2:	%{name}-media.tar.gz
@@ -64,15 +66,6 @@ BuildRequires:	autoconf
 BuildRequires:	cmake
 BuildRequires:	fltk-devel
 BuildRequires:	pkgconfig(libtirpc)
-
-#------------------------------------------------------------------------------
-
-# package tigervnc
-
-Summary:	Viewer for the VNC remote display system
-Group:		Networking/Remote access
-
-# Old RealVNC package:
 Provides:	vncviewer
 Conflicts:	tightvnc
 
@@ -127,12 +120,9 @@ others to access the desktop on your machine.
 #------------------------------------------------------------------------------
 
 %package server-module
-
 Summary:	Xorg module for the VNC remote display system
 Group:		Networking/Remote access
-
 Provides:	vnc-server-module
-
 Requires:	x11-server-xorg
 
 %description server-module
@@ -149,7 +139,6 @@ to access the desktop on your machine.
 
 Summary:	Java viewer for the VNC remote display system
 Group:		Networking/Remote access
-
 # Old RealVNC package:
 Provides:	vnc-java
 Conflicts:	tightvnc-java
@@ -255,8 +244,6 @@ cd ..
 popd
 
 %install
-rm -rf %{buildroot}
-
 pushd build
 %makeinstall_std
 popd
@@ -270,8 +257,8 @@ mkdir -p %{buildroot}%{_unitdir}
 install -m644 %{SOURCE3} %{buildroot}%{_unitdir}/vncserver@.service
 rm -rf %{buildroot}%{_initrddir}
 
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
-install -m644 %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/vncservers
+mkdir -p %{buildroot}%{_sysconfdir}/sysconfig
+install -m644 %{SOURCE4} %{buildroot}%{_sysconfdir}/sysconfig/vncservers
 
 # Install desktop stuff
 mkdir -p %{buildroot}/%{_datadir}/icons/hicolor/{16x16,24x24,48x48}/apps
