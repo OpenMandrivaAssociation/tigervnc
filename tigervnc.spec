@@ -13,7 +13,7 @@ Version:	1.6.0
 Release:	0.%{snapshotversion}.1
 Source0:	%{name}-%{version}-%{snapshotversion}.tar.gz
 %else
-Release:	4
+Release:	5
 Source0:	https://github.com/TigerVNC/tigervnc/archive/%{name}-%{version}.tar.gz
 %endif
 License:	GPLv2+
@@ -23,7 +23,6 @@ Source1:	vncviewer.desktop
 # Missing from "make dist":
 Source2:	%{name}-media.tar.gz
 Source3:	vncserver.service
-Source4:	vncserver.sysconfig
 Source5:	10-libvnc.conf
 Source6:	tigervnc-xserver116-rebased.patch
 # we put cmake build into a different dir
@@ -114,7 +113,6 @@ others to access the desktop on your machine.
 %{_mandir}/man1/vncconfig.1*
 %{_mandir}/man1/vncserver.1*
 %{_mandir}/man1/x0vncserver.1*
-%config(noreplace) %{_sysconfdir}/sysconfig/vncservers
 %{_unitdir}/vncserver@.service
 
 #------------------------------------------------------------------------------
@@ -254,9 +252,6 @@ popd
 mkdir -p %{buildroot}%{_unitdir}
 install -m644 %{SOURCE3} %{buildroot}%{_unitdir}/vncserver@.service
 rm -rf %{buildroot}%{_initrddir}
-
-mkdir -p %{buildroot}%{_sysconfdir}/sysconfig
-install -m644 %{SOURCE4} %{buildroot}%{_sysconfdir}/sysconfig/vncservers
 
 # Install desktop stuff
 mkdir -p %{buildroot}/%{_datadir}/icons/hicolor/{16x16,24x24,48x48}/apps
