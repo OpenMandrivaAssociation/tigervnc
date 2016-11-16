@@ -8,13 +8,13 @@
 
 Summary:	Viewer for the VNC remote display system
 Name:		tigervnc
-Version:	1.6.0
+Version:	1.7.0
 %if %{snapshot}
 Release:	0.%{snapshotversion}.1
 Source0:	%{name}-%{version}-%{snapshotversion}.tar.gz
 %else
-Release:	5
-Source0:	https://github.com/TigerVNC/tigervnc/archive/%{name}-%{version}.tar.gz
+Release:	1
+Source0:	https://github.com/TigerVNC/tigervnc/archive/v%{version}.tar.gz
 %endif
 License:	GPLv2+
 URL:		http://www.tigervnc.com/
@@ -23,19 +23,20 @@ Source1:	vncviewer.desktop
 # Missing from "make dist":
 Source2:	%{name}-media.tar.gz
 Source3:	vncserver.service
+Source4:	vncserver.sysconfig
 Source5:	10-libvnc.conf
-Source6:	tigervnc-xserver116-rebased.patch
+Source6:	tigervnc-xserver119.patch
 # we put cmake build into a different dir
 Patch1:		tigervnc-1.2.80-builddir.patch
 Patch2:		tigervnc-1.2.80-link.patch
 # fedora patches
-Patch10:	tigervnc-cookie.patch
-Patch12:	tigervnc11-rh692048.patch
-Patch14:	tigervnc-manpages.patch
-Patch16:	tigervnc-shebang.patch
-Patch18:	tigervnc-xstartup.patch
-Patch19:	tigervnc-xserver118.patch
-Patch20:	tigervnc-xorg118-QueueKeyboardEvents.patch
+Patch10:	tigervnc-1.7.0-xserver119-support.patch
+Patch13:	tigervnc-libvnc-os.patch
+Patch14:	tigervnc-xstartup.patch
+Patch17:	tigervnc-manpages.patch
+Patch18:	tigervnc-getmaster.patch
+Patch19:	tigervnc-shebang.patch
+Patch20:	tigervnc-utilize-system-crypto-policies.patch
 
 #(proyvind): FIXME: this one got fscked, needs to be fixed in Makefile.am, so
 # that miext/sync/libsync.la gets built first...
@@ -179,6 +180,7 @@ popd
 # Temporary build with -fno-omit-frame-pointer, it causes problems
 export CFLAGS="%{optflags} -fno-omit-frame-pointer"
 export CXXFLAGS="$CFLAGS"
+export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
 %{cmake}
 %make
@@ -197,7 +199,7 @@ autoreconf -fiv
 # After the "--disable-config-hal", most options are just a paste from
 # Mandriva's x11-server. We need to check what we can clean here (without
 # reducing features)
-export CC=gcc
+#export CC=gcc
 %configure  --disable-xorg \
 		--disable-xwin \
 		--disable-xvfb \
@@ -253,6 +255,9 @@ mkdir -p %{buildroot}%{_unitdir}
 install -m644 %{SOURCE3} %{buildroot}%{_unitdir}/vncserver@.service
 rm -rf %{buildroot}%{_initrddir}
 
+mkdir -p %{buildroot}%{_sysconfdir}/sysconfig
+install -m644 %{SOURCE4} %{buildroot}%{_sysconfdir}/sysconfig/vncservers
+
 # Install desktop stuff
 mkdir -p %{buildroot}/%{_datadir}/icons/hicolor/{16x16,24x24,48x48}/apps
 
@@ -262,7 +267,6 @@ pushd media/icons
     done
 popd
 
-mkdir %{buildroot}/%{_datadir}/applications
 desktop-file-install \
 	--dir %{buildroot}%{_datadir}/applications \
 	%{SOURCE1}
