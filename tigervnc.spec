@@ -21,7 +21,6 @@ URL:		http://www.tigervnc.com/
 Group:		Networking/Remote access
 Source1:	vncviewer.desktop
 Source3:	vncserver.service
-Source4:	vncserver.sysconfig
 Source5:	10-libvnc.conf
 Source6:	tigervnc-xserver120.patch
 # we put cmake build into a different dir (from us, then mga, then back here :)
@@ -101,7 +100,6 @@ variety of platforms.  This package is a TigerVNC server, allowing
 others to access the desktop on your machine.
 
 %files server
-%config(noreplace) %{_sysconfdir}/sysconfig/vncservers
 %{_bindir}/vncconfig
 %{_bindir}/vncpasswd
 %{_bindir}/x0vncserver
@@ -254,9 +252,6 @@ popd
 mkdir -p %{buildroot}%{_unitdir}
 install -m644 %{SOURCE3} %{buildroot}%{_unitdir}/vncserver@.service
 rm -rf %{buildroot}%{_initrddir}
-
-mkdir -p %{buildroot}%{_sysconfdir}/sysconfig
-install -m644 %{SOURCE4} %{buildroot}%{_sysconfdir}/sysconfig/vncservers
 
 # Install desktop stuff
 mkdir -p %{buildroot}/%{_datadir}/icons/hicolor/{16x16,24x24,48x48}/apps
