@@ -20,14 +20,12 @@ License:	GPLv2+
 URL:		http://www.tigervnc.com/
 Group:		Networking/Remote access
 Source1:	vncviewer.desktop
-# Missing from "make dist":
-Source2:	%{name}-media.tar.gz
 Source3:	vncserver.service
 Source4:	vncserver.sysconfig
 Source5:	10-libvnc.conf
 Source6:	tigervnc-xserver120.patch
-# we put cmake build into a different dir
-#Patch1:		tigervnc-1.2.80-builddir.patch
+# we put cmake build into a different dir (from us, then mga, then back here :)
+Patch1:		tigervnc-1.8.90-mga-buildir.patch
 Patch2:		tigervnc-1.2.80-link.patch
 # fedora patches
 Patch14:	tigervnc-xstartup.patch
@@ -77,7 +75,7 @@ client which will allow you to connect to other desktops running a VNC
 server.
 
 %files -f %{name}.lang
-%doc README.txt
+%doc README.rst
 %{_bindir}/vncviewer
 %{_iconsdir}/*
 %{_datadir}/applications/*
@@ -103,6 +101,7 @@ variety of platforms.  This package is a TigerVNC server, allowing
 others to access the desktop on your machine.
 
 %files server
+%config(noreplace) %{_sysconfdir}/sysconfig/vncservers
 %{_bindir}/vncconfig
 %{_bindir}/vncpasswd
 %{_bindir}/x0vncserver
@@ -161,9 +160,9 @@ There are three basic ways to use TigerVNC Java viewer:
 
 %prep
 %if %{snapshot}
-%setup -q -n %{name}-%{version}-%{snapshotversion} -a2
+%setup -q -n %{name}-%{version}-%{snapshotversion}
 %else
-%setup -q -a2
+%setup -q
 %endif
 cp -r /usr/share/x11-server-source/* unix/xserver
 pushd unix/xserver
@@ -230,7 +229,9 @@ popd
 
 # Build icons
 pushd media
+%{cmake}
 %make
+cd ..
 popd
 
 # Build java
