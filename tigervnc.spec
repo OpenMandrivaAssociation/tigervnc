@@ -8,12 +8,12 @@
 
 Summary:	Viewer for the VNC remote display system
 Name:		tigervnc
-Version:	1.7.0
+Version:	1.9.0
 %if %{snapshot}
 Release:	0.%{snapshotversion}.1
 Source0:	%{name}-%{version}-%{snapshotversion}.tar.gz
 %else
-Release:	2
+Release:	1
 Source0:	https://github.com/TigerVNC/tigervnc/archive/v%{version}.tar.gz
 %endif
 License:	GPLv2+
@@ -25,13 +25,11 @@ Source2:	%{name}-media.tar.gz
 Source3:	vncserver.service
 Source4:	vncserver.sysconfig
 Source5:	10-libvnc.conf
-Source6:	tigervnc-xserver119.patch
+Source6:	tigervnc-xserver120.patch
 # we put cmake build into a different dir
-Patch1:		tigervnc-1.2.80-builddir.patch
+#Patch1:		tigervnc-1.2.80-builddir.patch
 Patch2:		tigervnc-1.2.80-link.patch
 # fedora patches
-Patch10:	tigervnc-1.7.0-xserver119-support.patch
-Patch13:	tigervnc-libvnc-os.patch
 Patch14:	tigervnc-xstartup.patch
 Patch17:	tigervnc-manpages.patch
 Patch18:	tigervnc-getmaster.patch
