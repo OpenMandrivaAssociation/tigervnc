@@ -55,6 +55,7 @@ BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(pciaccess)
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig(gnutls)
+BuildRequires:	pkgconfig(xrender)
 BuildRequires:	imagemagick
 BuildRequires:	nasm
 BuildRequires:	java-devel
