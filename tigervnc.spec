@@ -62,6 +62,7 @@ BuildRequires:	autoconf
 BuildRequires:	cmake
 BuildRequires:	fltk-devel >= 1.3.3
 BuildRequires:	pkgconfig(libtirpc)
+BuildRequires:	pkgconfig(libjpeg)
 Provides:	vncviewer
 Conflicts:	tightvnc
 
