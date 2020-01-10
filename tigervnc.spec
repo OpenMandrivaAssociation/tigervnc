@@ -171,7 +171,7 @@ for all in `find . -type f -perm -001`; do
 done
 patch -p1 -b --suffix .vnc < %{SOURCE6}
 popd
-%apply_patches
+%autopatch -p1
 
 
 %build
