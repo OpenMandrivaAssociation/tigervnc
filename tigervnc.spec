@@ -40,6 +40,7 @@ Patch20:	tigervnc-utilize-system-crypto-policies.patch
 BuildRequires:	x11-server-source
 BuildRequires:	gettext-devel
 BuildRequires:  pkgconfig(libdrm)
+BuildRequires:  pkgconfig(dri)
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xi)
