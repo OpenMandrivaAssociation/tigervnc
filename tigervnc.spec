@@ -8,7 +8,7 @@
 
 Summary:	Viewer for the VNC remote display system
 Name:		tigervnc
-Version:	1.9.0
+Version:	1.12.0
 %if %{snapshot}
 Release:	0.%{snapshotversion}.1
 Source0:	%{name}-%{version}-%{snapshotversion}.tar.gz
