@@ -14,7 +14,7 @@ Release:	0.%{snapshotversion}.1
 Source0:	%{name}-%{version}-%{snapshotversion}.tar.gz
 %else
 Release:	2
-Source0:	https://github.com/TigerVNC/tigervnc/archive/v%{version}.tar.gz
+Source0:	https://github.com/TigerVNC/tigervnc/archive/v%{version}/%{name}-%{version}.tar.gz
 %endif
 License:	GPLv2+
 URL:		http://www.tigervnc.com/
