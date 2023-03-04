@@ -1,11 +1,12 @@
---- tigervnc-1.3.0/unix/xserver/hw/vnc/Makefile.am.0002~	2014-02-18 11:30:58.745803593 +0100
-+++ tigervnc-1.3.0/unix/xserver/hw/vnc/Makefile.am	2014-02-18 11:31:35.361802094 +0100
-@@ -37,7 +37,7 @@ Xvnc_CPPFLAGS = $(XVNC_CPPFLAGS) -DTIGER
- 	-I$(top_srcdir)/include ${XSERVERLIBS_CFLAGS} -I$(includedir)
+diff -up tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am.2~ tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am
+--- tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am.2~	2023-03-04 15:39:47.830158842 +0100
++++ tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am	2023-03-04 15:41:12.336728543 +0100
+@@ -51,7 +51,7 @@ LOCAL_LIBS = \
+ 	$(COMMON_LIBS)
  
- Xvnc_LDADD = $(XVNC_LIBS) libvnccommon.la $(COMMON_LIBS) \
--	$(XSERVER_LIBS) $(XSERVER_SYS_LIBS) $(XVNC_SYS_LIBS) -lX11
-+	$(XSERVER_LIBS) $(XSERVER_SYS_LIBS) $(XVNC_SYS_LIBS) -lX11 -lcrypto
+ Xvnc_DEPENDENCIES = $(LOCAL_LIBS)
+-Xvnc_LDADD = $(LOCAL_LIBS) $(XSERVER_SYS_LIBS) $(XVNC_SYS_LIBS) -lX11
++Xvnc_LDADD = $(LOCAL_LIBS) $(XSERVER_SYS_LIBS) $(XVNC_SYS_LIBS) -lX11 -lcrypto
  
  Xvnc_LDFLAGS = $(LD_EXPORT_SYMBOLS_FLAG)
  

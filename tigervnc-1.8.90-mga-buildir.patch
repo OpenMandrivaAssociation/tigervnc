@@ -1,7 +1,7 @@
-diff -Nru a/unix/xserver/hw/vnc/Makefile.am b/unix/xserver/hw/vnc/Makefile.am
---- a/unix/xserver/hw/vnc/Makefile.am	2018-06-13 16:28:57.000000000 +0200
-+++ b/unix/xserver/hw/vnc/Makefile.am	2018-07-14 16:34:14.662521811 +0200
-@@ -1,12 +1,12 @@
+diff -up tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am.1~ tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am
+--- tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am.1~	2023-03-04 15:37:45.821330579 +0100
++++ tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am	2023-03-04 15:38:38.204687104 +0100
+@@ -1,11 +1,11 @@
  TIGERVNC_SRCDIR=${top_srcdir}/../..
  TIGERVNC_BUILDDIR=${TIGERVNC_SRCDIR}
  
@@ -9,14 +9,12 @@ diff -Nru a/unix/xserver/hw/vnc/Makefile.am b/unix/xserver/hw/vnc/Makefile.am
 -RDR_LIB=$(TIGERVNC_BUILDDIR)/common/rdr/librdr.la
 -OS_LIB=$(TIGERVNC_BUILDDIR)/common/os/libos.la
 -NETWORK_LIB=$(TIGERVNC_BUILDDIR)/common/network/libnetwork.la
--XREGION_LIB=$(TIGERVNC_BUILDDIR)/common/Xregion/libXregion.la
 -UNIXCOMMON_LIB=$(TIGERVNC_BUILDDIR)/unix/common/libunixcommon.la
 +RFB_LIB=$(TIGERVNC_BUILDDIR)/build/common/rfb/librfb.la
 +RDR_LIB=$(TIGERVNC_BUILDDIR)/build/common/rdr/librdr.la
 +OS_LIB=$(TIGERVNC_BUILDDIR)/build/common/os/libos.la
 +NETWORK_LIB=$(TIGERVNC_BUILDDIR)/build/common/network/libnetwork.la
-+XREGION_LIB=$(TIGERVNC_BUILDDIR)/build/common/Xregion/libXregion.la
 +UNIXCOMMON_LIB=$(TIGERVNC_BUILDDIR)/build/unix/common/libunixcommon.la
- COMMON_LIBS=$(NETWORK_LIB) $(RFB_LIB) $(RDR_LIB) $(XREGION_LIB) $(OS_LIB) $(UNIXCOMMON_LIB)
+ COMMON_LIBS=$(NETWORK_LIB) $(RFB_LIB) $(RDR_LIB) $(OS_LIB) $(UNIXCOMMON_LIB)
  
  noinst_LTLIBRARIES = libvnccommon.la

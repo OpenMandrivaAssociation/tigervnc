@@ -67,7 +67,7 @@ index 5596e21..003fc3c 100644
  #include "globals.h"
 
 +#ifdef TIGERVNC
-+extern void vncExtensionInit(void);
++extern void vncExtensionInit(INITARGS);
 +#endif
 +
  /* List of built-in (statically linked) extensions */
