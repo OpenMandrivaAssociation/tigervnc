@@ -38,6 +38,7 @@ BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xi)
 BuildRequires:	pkgconfig(xtst)
+BuildRequires:	pkgconfig(libxcvt)
 BuildRequires:	x11-font-util
 BuildRequires:	x11-util-macros
 BuildRequires:	pkgconfig(xtrans)
