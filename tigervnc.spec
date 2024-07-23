@@ -173,7 +173,7 @@ pushd unix/xserver
 for all in `find . -type f -perm -001`; do
 	chmod -x "$all"
 done
-patch -p1 -b -z .xserver~ <../xserver21.1.1.patch
+patch -p1 -b -z .xserver~ <../xserver120.patch
 popd
 
 
