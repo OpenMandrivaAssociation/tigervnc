@@ -167,14 +167,14 @@ There are three basic ways to use TigerVNC Java viewer:
 %autosetup -p1 -n %{name}-%{version}-%{snapshotversion}
 %else
 %autosetup -p1
-%endif
-cp -r /usr/share/x11-server-source/* unix/xserver
-pushd unix/xserver
-for all in `find . -type f -perm -001`; do
-	chmod -x "$all"
-done
-patch -p1 -b -z .xserver~ <../xserver21.1.1.patch
-popd
+#endif
+#cp -r /usr/share/x11-server-source/* unix/xserver
+#pushd unix/xserver
+#for all in `find . -type f -perm -001`; do
+#	chmod -x "$all"
+#done
+#patch -p1 -b -z .xserver~ <../xserver21.1.1.patch
+#popd
 
 
 %build
