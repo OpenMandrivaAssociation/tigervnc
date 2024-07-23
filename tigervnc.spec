@@ -167,7 +167,7 @@ There are three basic ways to use TigerVNC Java viewer:
 %autosetup -p1 -n %{name}-%{version}-%{snapshotversion}
 %else
 %autosetup -p1
-#endif
+%endif
 #cp -r /usr/share/x11-server-source/* unix/xserver
 #pushd unix/xserver
 #for all in `find . -type f -perm -001`; do
