@@ -24,7 +24,7 @@ Source3:	vncserver.service
 Source5:	10-libvnc.conf
 # we put cmake build into a different dir (from us, then mga, then back here :)
 Patch1:		tigervnc-1.8.90-mga-buildir.patch
-Patch2:		tigervnc-1.2.80-link.patch
+#Patch2:		tigervnc-1.2.80-link.patch
 
 #(proyvind): FIXME: this one got fscked, needs to be fixed in Makefile.am, so
 # that miext/sync/libsync.la gets built first...
