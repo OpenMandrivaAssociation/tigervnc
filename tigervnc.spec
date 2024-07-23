@@ -8,13 +8,13 @@
 
 Summary:	Viewer for the VNC remote display system
 Name:		tigervnc
-Version:	1.13.1
+Version:	1.14.0
 %if %{snapshot}
 Release:	0.%{snapshotversion}.1
 Source0:	%{name}-%{version}-%{snapshotversion}.tar.gz
 %else
-Release:	2
-Source0:	https://github.com/TigerVNC/tigervnc/archive/v%{version}.tar.gz
+Release:	1
+Source0:	https://github.com/TigerVNC/tigervnc/archive/v%{version}/%{name}-%{version}.tar.gz
 %endif
 License:	GPLv2+
 URL:		http://www.tigervnc.com/
