@@ -1,6 +1,6 @@
-diff -up tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am.1~ tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am
---- tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am.1~	2023-03-04 15:37:45.821330579 +0100
-+++ tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am	2023-03-04 15:38:38.204687104 +0100
+diff -uraN tigervnc-1.14.0/unix/xserver/hw/vnc/Makefile.am omv-tigervnc-1.14.0/unix/xserver/hw/vnc/Makefile.am
+--- tigervnc-1.14.0/unix/xserver/hw/vnc/Makefile.am	2024-07-23 10:50:25.000000000 +0200
++++ omv-tigervnc-1.14.0/unix/xserver/hw/vnc/Makefile.am	2024-07-23 18:33:07.547968585 +0200
 @@ -1,11 +1,11 @@
  TIGERVNC_SRCDIR=${top_srcdir}/../..
  TIGERVNC_BUILDDIR=${TIGERVNC_SRCDIR}
@@ -17,4 +17,4 @@ diff -up tigervnc-1.13.1/unix/xserver/hw/vnc/Makefile.am.1~ tigervnc-1.13.1/unix
 +UNIXCOMMON_LIB=$(TIGERVNC_BUILDDIR)/build/unix/common/libunixcommon.la
  COMMON_LIBS=$(NETWORK_LIB) $(RFB_LIB) $(RDR_LIB) $(OS_LIB) $(UNIXCOMMON_LIB)
  
- noinst_LTLIBRARIES = libvnccommon.la
+ AM_CPPFLAGS = \
