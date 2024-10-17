@@ -17,7 +17,7 @@ Release:	2
 Source0:	https://github.com/TigerVNC/tigervnc/archive/v%{version}.tar.gz
 %endif
 License:	GPLv2+
-URL:		http://www.tigervnc.com/
+URL:		https://www.tigervnc.com/
 Group:		Networking/Remote access
 Source1:	vncviewer.desktop
 Source3:	vncserver.service
