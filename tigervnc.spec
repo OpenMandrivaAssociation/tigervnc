@@ -195,7 +195,7 @@ cd ..
 
 pushd unix/xserver
 #rm -f configure
-#autoreconf -fiv
+autoreconf -fiv
 
 # After the "--disable-config-hal", most options are just a paste from
 # Mandriva's x11-server. We need to check what we can clean here (without
