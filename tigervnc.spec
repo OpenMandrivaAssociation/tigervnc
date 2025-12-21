@@ -30,6 +30,9 @@ Patch2:		tigervnc-1.2.80-link.patch
 # that miext/sync/libsync.la gets built first...
 #Patch18: tigervnc-1.0.90-link-against-forgotten-local-library.patch
 
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:	x11-server-source
 BuildRequires:	gettext-devel
 BuildRequires:  pkgconfig(libdrm)
