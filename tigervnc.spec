@@ -8,9 +8,9 @@
 
 Summary:	Viewer for the VNC remote display system
 Name:		tigervnc
-Version:	1.13.1
+Version:	1.16.2
 %if %{snapshot}
-Release:	0.%{snapshotversion}.1
+Release:	1.%{snapshotversion}.1
 Source0:	%{name}-%{version}-%{snapshotversion}.tar.gz
 %else
 Release:	2
@@ -176,7 +176,7 @@ pushd unix/xserver
 for all in `find . -type f -perm -001`; do
 	chmod -x "$all"
 done
-patch -p1 -b -z .xserver~ <../xserver21.1.1.patch
+patch -p1 -b -z .xserver~ <../xserver21.patch
 popd
 
 
