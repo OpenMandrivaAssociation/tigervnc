@@ -13,7 +13,7 @@ Version:	1.16.2
 Release:	1.%{snapshotversion}.1
 Source0:	%{name}-%{version}-%{snapshotversion}.tar.gz
 %else
-Release:	2
+Release:	3
 Source0:	https://github.com/TigerVNC/tigervnc/archive/v%{version}.tar.gz
 %endif
 License:	GPLv2+
@@ -56,6 +56,9 @@ BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(pciaccess)
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig(gnutls)
+BuildRequires:	pkgconfig(nettle)
+BuildRequires:	pkgconfig(hogweed)
+BuildRequires:	pkgconfig(gmp)
 BuildRequires:	pkgconfig(xrender)
 BuildRequires:	imagemagick
 BuildRequires:	nasm
