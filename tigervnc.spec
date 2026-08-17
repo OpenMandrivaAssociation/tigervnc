@@ -202,6 +202,8 @@ export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 %cmake -G Ninja
 %ninja_build
 cd ..
+# hw/vnc includes <config.h> from the tigervnc source root
+cp -a build/config.h .
 
 # XXX: I'm not sure this define is actually needed
 # Need this for shared objects that reference X Server, or other modules symbols
