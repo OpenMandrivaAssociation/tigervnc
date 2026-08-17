@@ -251,6 +251,8 @@ popd
 
 # Build icons
 pushd media
+grep -q cmake_minimum_required CMakeLists.txt || \
+	sed -i '1i cmake_minimum_required(VERSION 3.10)' CMakeLists.txt
 %cmake -G Ninja
 %ninja_build
 cd ..
@@ -258,6 +260,9 @@ popd
 
 # Build java
 pushd java
+# CMake 4 requires an explicit minimum
+grep -q cmake_minimum_required CMakeLists.txt || \
+	sed -i '1i cmake_minimum_required(VERSION 3.10)' CMakeLists.txt
 %cmake -G Ninja
 %ninja_build
 cd ..
