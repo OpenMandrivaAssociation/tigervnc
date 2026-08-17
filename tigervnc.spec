@@ -67,6 +67,7 @@ BuildRequires:	java-devel
 BuildRequires:	autoconf
 BuildRequires:	cmake
 BuildRequires:	ninja
+BuildRequires:	make
 BuildRequires:	fltk-devel >= 1.3.3
 BuildRequires:	pkgconfig(libtirpc)
 BuildRequires:	pkgconfig(libjpeg)
@@ -236,7 +237,7 @@ autoreconf -fiv
 		--enable-pam \
 		--with-default-font-path="catalogue:%{_sysconfdir}/X11/fontpath.d"
 
-%make
+%make_build
 popd
 
 # Build icons
