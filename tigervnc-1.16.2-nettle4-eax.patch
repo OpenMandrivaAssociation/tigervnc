@@ -1,0 +1,34 @@
+--- a/common/rdr/AESInStream.cxx	2026-03-26 10:21:13.000000000 +0100
++++ b/common/rdr/AESInStream.cxx	2026-08-17 06:51:19.518089538 +0200
+@@ -62,12 +62,12 @@
+     EAX_SET_NONCE(&eaxCtx128, aes128_encrypt, 16, counter);
+     EAX_UPDATE(&eaxCtx128, aes128_encrypt, 2, ad);
+     EAX_DECRYPT(&eaxCtx128, aes128_encrypt, length, (uint8_t*)end, data);
+-    EAX_DIGEST(&eaxCtx128, aes128_encrypt, 16, macComputed);
++    EAX_DIGEST(&eaxCtx128, aes128_encrypt, macComputed);
+   } else {
+     EAX_SET_NONCE(&eaxCtx256, aes256_encrypt, 16, counter);
+     EAX_UPDATE(&eaxCtx256, aes256_encrypt, 2, ad);
+     EAX_DECRYPT(&eaxCtx256, aes256_encrypt, length, (uint8_t*)end, data);
+-    EAX_DIGEST(&eaxCtx256, aes256_encrypt, 16, macComputed);
++    EAX_DIGEST(&eaxCtx256, aes256_encrypt, macComputed);
+   }
+   if (memcmp(mac, macComputed, 16) != 0)
+     throw std::runtime_error("AESInStream: Failed to authenticate message");
+--- a/common/rdr/AESOutStream.cxx	2026-03-26 10:21:13.000000000 +0100
++++ b/common/rdr/AESOutStream.cxx	2026-08-17 06:51:19.518139299 +0200
+@@ -83,12 +83,12 @@
+     EAX_SET_NONCE(&eaxCtx128, aes128_encrypt, 16, counter);
+     EAX_UPDATE(&eaxCtx128, aes128_encrypt, 2, msg);
+     EAX_ENCRYPT(&eaxCtx128, aes128_encrypt, length, msg + 2, data);
+-    EAX_DIGEST(&eaxCtx128, aes128_encrypt, 16, msg + 2 + length);
++    EAX_DIGEST(&eaxCtx128, aes128_encrypt, msg + 2 + length);
+   } else {
+     EAX_SET_NONCE(&eaxCtx256, aes256_encrypt, 16, counter);
+     EAX_UPDATE(&eaxCtx256, aes256_encrypt, 2, msg);
+     EAX_ENCRYPT(&eaxCtx256, aes256_encrypt, length, msg + 2, data);
+-    EAX_DIGEST(&eaxCtx256, aes256_encrypt, 16, msg + 2 + length);
++    EAX_DIGEST(&eaxCtx256, aes256_encrypt, msg + 2 + length);
+   }
+   out->writeBytes(msg, 2 + length + 16);
+   out->flush();
