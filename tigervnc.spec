@@ -35,6 +35,7 @@ Patch5:		tigervnc-1.16.2-nettle4-digest.patch
 
 BuildRequires:	automake
 BuildRequires:	libtool-base
+BuildRequires:	libtool
 BuildRequires:	slibtool
 BuildRequires:	x11-server-source
 BuildRequires:	gettext-devel
@@ -268,7 +269,7 @@ pushd build
 popd
 
 pushd unix/xserver/hw/vnc
-%make_install
+%make_install LIBTOOL=/usr/bin/libtool
 popd
 
 # Install systemd unit file
