@@ -27,6 +27,7 @@ Patch1:		tigervnc-1.8.90-mga-buildir.patch
 Patch2:		tigervnc-1.2.80-link.patch
 Patch3:		tigervnc-1.16.2-fltk14.patch
 Patch4:		tigervnc-1.16.2-nettle4-eax.patch
+Patch5:		tigervnc-1.16.2-nettle4-digest.patch
 
 #(proyvind): FIXME: this one got fscked, needs to be fixed in Makefile.am, so
 # that miext/sync/libsync.la gets built first...
