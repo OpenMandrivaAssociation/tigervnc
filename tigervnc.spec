@@ -180,6 +180,11 @@ There are three basic ways to use TigerVNC Java viewer:
 %autosetup -p1
 %endif
 cp -r /usr/share/x11-server-source/* unix/xserver
+# Nettle 4 dropped sha.h and the length argument on sha1_digest
+sed -i \
+	-e 's|#include <nettle/sha.h>|#include <nettle/sha1.h>|' \
+	-e 's|sha1_digest(ctx, 20, result);|sha1_digest(ctx, result);|' \
+	unix/xserver/os/xsha1.c
 pushd unix/xserver
 for all in `find . -type f -perm -001`; do
 	chmod -x "$all"
