@@ -244,7 +244,8 @@ autoreconf -fiv
 		--enable-pam \
 		--with-default-font-path="catalogue:%{_sysconfdir}/X11/fontpath.d"
 
-%make_build
+# cmake-built .a files have no slibtool.deps; GNU libtool can still link them
+%make_build LIBTOOL=/usr/bin/libtool
 popd
 
 # Build icons
