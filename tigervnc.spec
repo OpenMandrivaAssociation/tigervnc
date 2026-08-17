@@ -60,6 +60,7 @@ BuildRequires:	nasm
 BuildRequires:	java-devel
 BuildRequires:	autoconf
 BuildRequires:	cmake
+BuildRequires:	ninja
 BuildRequires:	fltk-devel >= 1.3.3
 BuildRequires:	pkgconfig(libtirpc)
 BuildRequires:	pkgconfig(libjpeg)
